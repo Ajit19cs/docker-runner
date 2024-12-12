@@ -11,12 +11,15 @@ pipeline {
                 bat "docker-compose logs -f testframework-container"
             }
         }
+    }
 
-        stage('Stop the Docker Image') {
-            steps {
-                // Stop and remove the containers after the test execution is complete
-                bat "docker-compose down"
-            }
+    post {
+        always {
+            // This will run after all stages, regardless of success or failure
+            bat "docker-compose down"
+            
+            // Archive the dynamically created index.html file
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'dockerOutput/result/*/index.html', fingerprint: true
         }
     }
 }
