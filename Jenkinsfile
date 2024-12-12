@@ -5,14 +5,14 @@ pipeline {
     stages {
         stage('run test ') {
             steps {
-                bat "docker-compose up"
+                bat "docker-compose up -d"
             }
         }
 
         
         stage('stop the docker image') {
             steps {
-                bat "docker-compose up"
+                bat "docker-compose down"
             }
         }
 
