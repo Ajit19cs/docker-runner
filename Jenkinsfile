@@ -18,8 +18,8 @@ pipeline {
             // This will run after all stages, regardless of success or failure
             bat "docker-compose down"
             
-            // Archive the dynamically created index.html file
-            archiveArtifacts allowEmptyArchive: true, artifacts: 'dockerOutput/result/*/index.html', fingerprint: true
+            // Archive the entire folder containing the HTML report, its related resources, and the spark folder
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'dockerOutput/result/*/index.html, dockerOutput/result/*/spark/**/*', fingerprint: true
         }
     }
 }
